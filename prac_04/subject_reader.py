@@ -1,21 +1,22 @@
+def get_data(filename):
+    data = []
+    with open(filename, 'r') as file:
+        for line in file:
+            parts = line.strip().split(',')
+            code, lecturer, students = parts
+            students = int(students)
+            data.append([code, lecturer, students])
+    return data
+
+def display_subject_details(data):
+    for subject in data:
+        code, lecturer, students = subject
+        print(f"{code} is taught by {lecturer} and has {students} students")
+
 def main():
-    data = get_data()
-    print(data)
+    filename = "subject_data.txt"
+    data = get_data(filename)
+    display_subject_details(data)
 
-
-def get_data():
-    """Read data from file formatted like: subject,lecturer,number of students."""
-    input_file = open(FILENAME)
-    for line in input_file:
-        print(line)  # See what a line looks like
-        print(repr(line))  # See what a line really looks like
-        line = line.strip()  # Remove the \n
-        parts = line.split(',')  # Separate the data into its parts
-        print(parts)  # See what the parts look like (notice the integer is a string)
-        parts[2] = int(parts[2])  # Make the number an integer (ignore PyCharm's warning)
-        print(parts)  # See if that worked
-        print("----------")
-    input_file.close()
-
-
-main()
+if __name__ == "__main__":
+    main()
